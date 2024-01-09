@@ -83,6 +83,7 @@
     "it-all": "^1.0.6",
     "lodash.isempty": "^4.4.0",
     "lodash.isstring": "^4.0.1",
+    "mongodb": "^6.3.0",
     "open": "^8.4.0",
     "terminal-link": "^2.1.1",
     "trammel": "^5.0.0",
