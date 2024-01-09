@@ -8,6 +8,7 @@
 const updateNotifier = require('update-notifier')
 const yargs = require('yargs')
 const dotenv = require('dotenv')
+const { cleanup } = require('./ipfs-cleanup')
 
 const { deploy, dnsLinkersMap, pinnersMap } = require('.')
 const pkg = require('../package.json')
@@ -78,6 +79,27 @@ const argv = yargs
             describe: 'Add hidden (dot) files to IPFS',
             type: 'boolean',
             default: false
+          },
+          'mongo-url': {
+            describe: 'MongoDB connection URL',
+            demandOption: true,
+            type: 'string'
+          },
+          'db-name': {
+            describe: 'MongoDB database name',
+            demandOption: true,
+            type: 'string'
+          },
+          'collection-name': {
+            describe: 'MongoDB collection name',
+            demandOption: true,
+            type: 'string'
+          },
+          'keep-pins': {
+            describe: 'Number of CIDs to keep during cleanup',
+            demandOption: false,
+            type: 'number',
+            default: 5
           }
         })
         .example(
@@ -187,7 +209,8 @@ if (!options.uploadServices && !options.pinningServices) {
 
 async function main () {
   try {
-    await deploy(options)
+    const cid = await deploy(options)
+    await cleanup(options.pinningServicesCredentials['ipfs-node'], argv['mongo-url'], argv['db-name'], argv['collection-name'], cid, argv['keep-pins'])
   } catch (e) {
     options.logger.error('❌  An error has occurred:\n')
     options.logger.error(e.stack || e.toString())
