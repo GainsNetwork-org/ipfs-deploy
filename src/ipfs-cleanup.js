@@ -20,7 +20,7 @@ async function cleanup (ipfsOptions, mongoUrl, dbName, collectionName, newCid, k
   await collection.insertOne({ cid: newCid, timestamp: new Date() })
   console.log(`Inserted CID: ${newCid}`)
 
-  // Fetch most recent 5 CIDs from MongoDB
+  // Fetch most recent CIDs from MongoDB
   const recentCids = await collection.find().sort({ timestamp: -1 }).limit(keepPins).toArray()
   const keepCidsSet = new Set(recentCids.map(item => item.cid))
 
