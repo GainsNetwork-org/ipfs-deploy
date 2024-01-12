@@ -26,12 +26,14 @@ async function cleanup (ipfsOptions, mongoUrl, dbName, collectionName, newCid, k
 
   // Connect to IPFS and fetch all active pins
   const ipfs = ipfsHttp(ipfsOptions)
-  const allPins = await all(ipfs.pin.ls())
+  const allPins = await all(ipfs.pin.ls({ type: 'recursive' }))
+
+  console.log(`Found ${allPins.length} active pins`)
 
   // Unpin CIDs that are not in the recent list
   const unpinPromises = allPins
     .filter(pin => !keepCidsSet.has(pin.cid.toString()))
-    .map(pin => ipfs.pin.rm(pin.cid).then(() => console.log(`Unpinned: ${pin.cid}`)))
+    .map(pin => ipfs.pin.rm(pin.cid).then(() => console.log(`Unpinned: ${pin.cid}`)).catch(err => console.error(err)))
 
   await Promise.all(unpinPromises)
   console.log(`Cleanup complete, kept the most recent ${keepPins} CIDs.`)
