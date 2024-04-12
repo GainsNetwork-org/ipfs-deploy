@@ -17,9 +17,9 @@ async function cleanup (ipfsOptions, mongoUrl, dbName, collectionName, newCid, k
     await mongoClient.connect()
     const collection = mongoClient.db(dbName).collection(collectionName)
 
-    // Insert new CID
-    await collection.insertOne({ cid: newCid, timestamp: new Date() })
-    console.log(`Inserted CID: ${newCid}`)
+    // // Insert new CID
+    // await collection.insertOne({ cid: newCid, timestamp: new Date() })
+    // console.log(`Inserted CID: ${newCid}`)
 
     // Fetch most recent CIDs from MongoDB
     const recentCids = await collection.find().sort({ timestamp: -1 }).limit(keepPins).toArray()
@@ -30,6 +30,7 @@ async function cleanup (ipfsOptions, mongoUrl, dbName, collectionName, newCid, k
     const allPins = await all(ipfs.pin.ls({ type: 'recursive' }))
 
     console.log(`Found ${allPins.length} active pins`)
+    console.log(`Keeping ${[...keepCidsSet]} CIDs`)
 
     // Unpin CIDs that are not in the recent list
     const unpinPromises = allPins
@@ -37,6 +38,9 @@ async function cleanup (ipfsOptions, mongoUrl, dbName, collectionName, newCid, k
       .map(pin => ipfs.pin.rm(pin.cid).then(() => console.log(`Unpinned: ${pin.cid}`)).catch(err => console.error(err)))
 
     await Promise.all(unpinPromises)
+
+    // Run GC
+    await Promise.all([ipfs.repo.gc()])
     console.log(`Cleanup complete, kept the most recent ${keepPins} CIDs.`)
   } catch (e) {
     console.log('Error: ', e)

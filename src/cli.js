@@ -209,8 +209,8 @@ if (!options.uploadServices && !options.pinningServices) {
 
 async function main () {
   try {
-    const cid = await deploy(options)
-    await cleanup(options.pinningServicesCredentials['ipfs-node'], argv['mongo-url'], argv['db-name'], argv['collection-name'], cid, argv['keep-pins'])
+    // const cid = await deploy(options)
+    await cleanup(options.pinningServicesCredentials['ipfs-node'], argv['mongo-url'], argv['db-name'], argv['collection-name'], 'idc', argv['keep-pins'])
   } catch (e) {
     options.logger.error('❌  An error has occurred:\n')
     options.logger.error(e.stack || e.toString())
