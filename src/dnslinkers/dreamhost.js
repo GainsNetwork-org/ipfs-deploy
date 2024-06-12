@@ -1,15 +1,15 @@
 'use strict'
 
 // @ts-ignore
-const DreamHostClient = require('dreamhost')
-const isEmpty = require('lodash.isempty')
+import DreamHostClient from 'dreamhost'
+import { isEmpty } from 'lodash'
 
 /**
  * @typedef {import('./types').DNSRecord} DNSRecord
  * @typedef {import('./types').DreamHostOptions} DreamHostOptions
  */
 
-class DreamHost {
+export class DreamHost {
   /**
    * @param {DreamHostOptions} options
    */

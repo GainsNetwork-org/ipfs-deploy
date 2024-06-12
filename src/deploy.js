@@ -1,12 +1,19 @@
 'use strict'
 
-const chalk = require('chalk')
-const path = require('path')
-const fs = require('fs')
+// const chalk = require('chalk')
+// const path = require('path')
+// const fs = require('fs')
 
-const { dnsLinkersMap } = require('./dnslinkers')
-const { pinnersMap } = require('./pinners')
-const { guessPath, getReadableSize, terminalUrl } = require('./utils')
+// const { dnsLinkersMap } = require('./dnslinkers')
+// const { pinnersMap } = require('./pinners')
+// const { guessPath, getReadableSize, terminalUrl } = require('./utils')
+
+import chalk from 'chalk'
+import path from 'path'
+import fs from 'fs'
+import { dnsLinkersMap } from './dnslinkers/index.js'
+import { pinnersMap } from './pinners/index.js'
+import { guessPath, getReadableSize, terminalUrl } from './utils.js'
 
 /**
  * @typedef {import('./dnslinkers/types').DNSLinker} DNSLinker
@@ -189,7 +196,7 @@ async function checkDirAndCid (dir, cid, logger) {
  * @param {DeployOptions} options
  * @returns {Promise<string>}
  */
-async function deploy ({
+export async function deploy ({
   dir,
   cid,
   tag,

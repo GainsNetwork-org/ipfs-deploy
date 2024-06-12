@@ -1,15 +1,16 @@
 'use strict'
 
-const { create: ipfsHttp, globSource } = require('ipfs-http-client')
-const all = require('it-all')
-const path = require('path')
+import { create as ipfsHttp, globSource } from 'ipfs-http-client'
+import all from 'it-all'
+import path from 'path'
+
 
 /**
  * @typedef {import('ipfs-http-client').Options} IpfsOptions
  * @typedef {import('./types').PinDirOptions} PinDirOptions
  */
 
-class IpfsNode {
+export class IpfsNode {
   /**
    * @param {IpfsOptions} options
    */

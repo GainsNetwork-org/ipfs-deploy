@@ -1,9 +1,10 @@
 'use strict'
 
-const isEmpty = require('lodash.isempty')
-const { FilebaseClient } = require('@filebase/client')
-const { filesFromPath } = require('files-from-path')
-const { default: axios } = require('axios')
+// Convert above requires to imports
+import isEmpty from 'lodash.isempty'
+import { FilebaseClient } from '@filebase/client'
+import { filesFromPath } from 'files-from-path'
+import axios from 'axios'
 
 /**
  * @typedef {import('./types').FilebaseOptions} FilebaseOptions
@@ -12,7 +13,7 @@ const { default: axios } = require('axios')
 
 const PIN_HASH_URL = 'https://api.filebase.io/v1/ipfs/pins'
 
-class Filebase {
+export class Filebase {
   /**
    * @param {FilebaseOptions} options
    */

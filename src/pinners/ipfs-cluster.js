@@ -1,16 +1,22 @@
 'use strict'
 
-const { default: axios } = require('axios')
-const path = require('path')
-const isEmpty = require('lodash.isempty')
-const { getDirFormData } = require('./utils')
+// const { default: axios } = require('axios')
+// const path = require('path')
+// const isEmpty = require('lodash.isempty')
+// const { getDirFormData } = require('./utils')
+
+import axios from 'axios'
+import path from 'path'
+import {isEmpty} from 'lodash'
+import { getDirFormData } from './utils.js'
+
 
 /**
  * @typedef {import('./types').IPFSClusterOptions} IPFSClusterOptions
  * @typedef {import('./types').PinDirOptions} PinDirOptions
  */
 
-class IpfsCluster {
+export class IpfsCluster {
   /**
    *
    * @param {IPFSClusterOptions} options

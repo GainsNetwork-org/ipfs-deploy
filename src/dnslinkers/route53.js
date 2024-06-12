@@ -2,8 +2,8 @@
 
 // @ts-ignore
 
-const { Route53Client, ChangeResourceRecordSetsCommand } = require('@aws-sdk/client-route-53')
-const isEmpty = require('lodash.isempty')
+import { Route53Client, ChangeResourceRecordSetsCommand } from '@aws-sdk/client-route-53'
+import { isEmpty } from 'lodash'
 const TTL = 60
 
 /**
@@ -11,7 +11,7 @@ const TTL = 60
  * @typedef {import('./types').Route53Options} Route53Options
  */
 
-class Route53 {
+export class Route53 {
   /**
    * @param {Route53Options} options
    */

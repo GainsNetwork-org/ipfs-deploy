@@ -1,8 +1,8 @@
 'use strict'
 
-const IpfsNode = require('./ipfs-node')
+import {IpfsNode} from './ipfs-node.js'
 
-class c4rex extends IpfsNode {
+export class c4rex extends IpfsNode {
   constructor () {
     super({
       host: 'api.ipfs.c4rex.co',
@@ -32,4 +32,3 @@ class c4rex extends IpfsNode {
   }
 }
 
-module.exports = c4rex

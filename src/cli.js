@@ -5,13 +5,12 @@
 /* eslint-disable no-console */
 'use strict'
 
-const updateNotifier = require('update-notifier')
-const yargs = require('yargs')
-const dotenv = require('dotenv')
-const { cleanup } = require('./ipfs-cleanup')
-
-const { deploy, dnsLinkersMap, pinnersMap } = require('.')
-const pkg = require('../package.json')
+import updateNotifier from 'update-notifier'
+import yargs from 'yargs'
+import dotenv from 'dotenv'
+import { cleanup } from './ipfs-cleanup.js'
+import { deploy, dnsLinkersMap, pinnersMap } from './index.js'
+import pkg from '../package.json' assert { type: "json" }
 
 const dnsProviders = [...dnsLinkersMap.keys()]
 const pinningServices = [...pinnersMap.keys()]
