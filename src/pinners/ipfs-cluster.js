@@ -7,7 +7,7 @@
 
 import axios from 'axios'
 import path from 'path'
-import {isEmpty} from 'lodash'
+import isEmpty from 'lodash.isempty'
 import { getDirFormData } from './utils.js'
 
 
@@ -99,5 +99,3 @@ export class IpfsCluster {
     return 'ipfs-cluster'
   }
 }
-
-module.exports = IpfsCluster

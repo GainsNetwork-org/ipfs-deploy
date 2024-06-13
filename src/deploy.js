@@ -14,6 +14,7 @@ import fs from 'fs'
 import { dnsLinkersMap } from './dnslinkers/index.js'
 import { pinnersMap } from './pinners/index.js'
 import { guessPath, getReadableSize, terminalUrl } from './utils.js'
+import { fileURLToPath } from 'url'
 
 /**
  * @typedef {import('./dnslinkers/types').DNSLinker} DNSLinker
@@ -217,7 +218,9 @@ export async function deploy ({
   const res = await checkDirAndCid(dir, cid, logger)
   dir = res.dir
   cid = res.cid
-
+  
+  // @ts-ignore
+  const __dirname = fileURLToPath(new URL('.', import.meta.url))
   tag = tag || __dirname
 
   // In the case we only set pinning services and we're deploying a directory,
@@ -288,4 +291,3 @@ export async function deploy ({
   return cid
 }
 
-module.exports = deploy

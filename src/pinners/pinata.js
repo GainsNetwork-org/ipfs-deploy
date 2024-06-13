@@ -1,7 +1,7 @@
 'use strict'
 
 import axios from 'axios'
-import { isEmpty } from 'lodash'
+import isEmpty from 'lodash.isempty'
 import { getDirFormData } from './utils.js'
 
 /**
@@ -111,5 +111,3 @@ export class Pinata {
     return 'pinata'
   }
 }
-
-module.exports = Pinata

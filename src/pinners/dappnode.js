@@ -23,5 +23,3 @@ export class DAppNode extends IpfsNode {
     return 'dappnode'
   }
 }
-
-module.exports = DAppNode

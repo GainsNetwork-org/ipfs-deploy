@@ -2,7 +2,7 @@
 
 // @ts-ignore
 import dnslink from 'dnslink-dnsimple'
-import { isEmpty } from 'lodash'
+import isEmpty from 'lodash.isempty'
 
 /**
  * @typedef {import('./types').DNSRecord} DNSRecord
@@ -63,5 +63,3 @@ export class DNSimple {
     return 'dnsimple'
   }
 }
-
-module.exports = DNSimple

@@ -24,8 +24,10 @@ export class IpfsNode {
    * @returns {Promise<string>}
    */
   async pinDir (dir, { tag, hidden = false } = {}) {
-    const response = await all(this.ipfs.addAll(globSource(dir, { recursive: true, hidden })))
+    // @ts-ignore
+    const response = await all(this.ipfs.addAll(globSource(dir, "**/*", { recursive: true, hidden }), { wrapWithDirectory: true}))
     const basename = path.basename(dir)
+    console.error(response, path, basename);
     const root = response.find(({ path }) => path === basename)
 
     if (!root) {
@@ -64,5 +66,3 @@ export class IpfsNode {
     return 'ipfs-node'
   }
 }
-
-module.exports = IpfsNode

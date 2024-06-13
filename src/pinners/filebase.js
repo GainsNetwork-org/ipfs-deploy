@@ -92,5 +92,3 @@ export class Filebase {
     return 'filebase'
   }
 }
-
-module.exports = Filebase

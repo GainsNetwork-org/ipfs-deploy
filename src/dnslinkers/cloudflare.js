@@ -3,7 +3,7 @@
 // @ts-ignore
 // Convert to imports
 import dnslink from 'dnslink-cloudflare'
-import { isEmpty } from 'lodash'
+import isEmpty from 'lodash.isempty'
 
 /**
  * @typedef {import('./types').DNSRecord} DNSRecord

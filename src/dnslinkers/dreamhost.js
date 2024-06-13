@@ -2,7 +2,7 @@
 
 // @ts-ignore
 import DreamHostClient from 'dreamhost'
-import { isEmpty } from 'lodash'
+import isEmpty from 'lodash.isempty'
 
 /**
  * @typedef {import('./types').DNSRecord} DNSRecord
@@ -80,5 +80,3 @@ export class DreamHost {
     return 'dreamhost'
   }
 }
-
-module.exports = DreamHost

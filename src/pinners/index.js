@@ -23,7 +23,3 @@ export const pinnersMap = pinners.reduce((map, pinner) => {
   return map
 }, new Map())
 
-module.exports = {
-  pinners,
-  pinnersMap
-}

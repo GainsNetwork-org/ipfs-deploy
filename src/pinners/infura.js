@@ -1,6 +1,6 @@
 'use strict'
 
-import {isString} from 'lodash'
+import isString from 'lodash.isstring'
 import {IpfsNode} from './ipfs-node.js'
 
 /**
@@ -46,5 +46,3 @@ export class Infura extends IpfsNode {
     return 'infura'
   }
 }
-
-module.exports = Infura

@@ -75,8 +75,3 @@ export function terminalUrl (title, link) {
   return `🔗  ${chalk.green(terminalLink(title, link))}`
 }
 
-module.exports = {
-  guessPath,
-  getReadableSize,
-  terminalUrl
-}

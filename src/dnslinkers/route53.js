@@ -3,7 +3,7 @@
 // @ts-ignore
 
 import { Route53Client, ChangeResourceRecordSetsCommand } from '@aws-sdk/client-route-53'
-import { isEmpty } from 'lodash'
+import isEmpty from 'lodash.isempty'
 const TTL = 60
 
 /**
@@ -80,5 +80,3 @@ export class Route53 {
     return 'route53'
   }
 }
-
-module.exports = Route53

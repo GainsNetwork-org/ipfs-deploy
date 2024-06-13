@@ -5,9 +5,9 @@
 /* eslint-disable no-console */
 'use strict'
 
-const { MongoClient } = require('mongodb')
+import { MongoClient } from 'mongodb'
 import { create as ipfsHttp } from 'ipfs-http-client'
-const all = require('it-all')
+import all from 'it-all'
 
 export async function cleanup (ipfsOptions, mongoUrl, dbName, collectionName, newCid, keepPins = 5) {
   console.log(`Cleanup started, keeping the most recent ${keepPins} CIDs.`)
