@@ -5,13 +5,13 @@
 /* eslint-disable no-console */
 'use strict'
 
-const updateNotifier = require('update-notifier')
-const yargs = require('yargs')
-const dotenv = require('dotenv')
-const { cleanup } = require('./ipfs-cleanup')
-
-const { deploy, dnsLinkersMap, pinnersMap } = require('.')
-const pkg = require('../package.json')
+import updateNotifier from 'update-notifier'
+import yargs from 'yargs'
+import dotenv from 'dotenv'
+import { cleanup } from './ipfs-cleanup.js'
+import { deploy, dnsLinkersMap, pinnersMap } from './index.js'
+import pkg from '../package.json' assert { type: "json" }
+import { hideBin } from 'yargs/helpers'
 
 const dnsProviders = [...dnsLinkersMap.keys()]
 const pinningServices = [...pinnersMap.keys()]
@@ -19,8 +19,7 @@ const pinningServices = [...pinnersMap.keys()]
 updateNotifier({ pkg, updateCheckInterval: 0 }).notify()
 dotenv.config()
 
-const argv = yargs
-  .scriptName('ipfs-deploy')
+const argv = yargs(hideBin(process.argv)).scriptName('ipfs-deploy')
   .usage(
     '$0 [path] [options]',
     'Upload static websites to IPFS pinning services and, optionally, update your DNS. Prints the CID to stdout so you can easily pipe into other programs.',

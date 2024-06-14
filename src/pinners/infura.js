@@ -1,14 +1,14 @@
 'use strict'
 
-const isString = require('lodash.isstring')
-const IpfsNode = require('./ipfs-node')
+import isString from 'lodash.isstring'
+import {IpfsNode} from './ipfs-node.js'
 
 /**
  * @typedef {import('ipfs-http-client').Options} IpfsOptions
  * @typedef {import('./types').InfuraOptions} InfuraOptions
  */
 
-class Infura extends IpfsNode {
+export class Infura extends IpfsNode {
   /**
    * @param {InfuraOptions} options
    */
@@ -46,5 +46,3 @@ class Infura extends IpfsNode {
     return 'infura'
   }
 }
-
-module.exports = Infura

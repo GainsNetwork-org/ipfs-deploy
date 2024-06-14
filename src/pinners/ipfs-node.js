@@ -1,15 +1,15 @@
 'use strict'
 
-const { create: ipfsHttp, globSource } = require('ipfs-http-client')
-const all = require('it-all')
-const path = require('path')
+import { create as ipfsHttp, globSource } from 'ipfs-http-client'
+import all from 'it-all'
+
 
 /**
  * @typedef {import('ipfs-http-client').Options} IpfsOptions
  * @typedef {import('./types').PinDirOptions} PinDirOptions
  */
 
-class IpfsNode {
+export class IpfsNode {
   /**
    * @param {IpfsOptions} options
    */
@@ -23,10 +23,9 @@ class IpfsNode {
    * @returns {Promise<string>}
    */
   async pinDir (dir, { tag, hidden = false } = {}) {
-    const response = await all(this.ipfs.addAll(globSource(dir, { recursive: true, hidden })))
-    const basename = path.basename(dir)
-    const root = response.find(({ path }) => path === basename)
-
+    // @ts-ignore
+    const response = await all(this.ipfs.addAll(globSource(dir, "**/*", { recursive: true, hidden }), { wrapWithDirectory: true}))
+    const root = response.find(({ path }) => path === "") // find the root directory
     if (!root) {
       throw new Error('could not determine the CID')
     }
@@ -63,5 +62,3 @@ class IpfsNode {
     return 'ipfs-node'
   }
 }
-
-module.exports = IpfsNode

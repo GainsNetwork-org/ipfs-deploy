@@ -5,11 +5,11 @@
 /* eslint-disable no-console */
 'use strict'
 
-const { MongoClient } = require('mongodb')
-const { create: ipfsHttp } = require('ipfs-http-client')
-const all = require('it-all')
+import { MongoClient } from 'mongodb'
+import { create as ipfsHttp } from 'ipfs-http-client'
+import all from 'it-all'
 
-async function cleanup (ipfsOptions, mongoUrl, dbName, collectionName, newCid, keepPins = 5) {
+export async function cleanup (ipfsOptions, mongoUrl, dbName, collectionName, newCid, keepPins = 5) {
   console.log(`Cleanup started, keeping the most recent ${keepPins} CIDs.`)
   // Connect to MongoDB
   const mongoClient = new MongoClient(mongoUrl)
@@ -45,5 +45,3 @@ async function cleanup (ipfsOptions, mongoUrl, dbName, collectionName, newCid, k
     await mongoClient.close()
   }
 }
-
-exports.cleanup = cleanup

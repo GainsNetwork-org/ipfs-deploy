@@ -1,15 +1,16 @@
 'use strict'
 
 // @ts-ignore
-const dnslink = require('dnslink-cloudflare')
-const isEmpty = require('lodash.isempty')
+// Convert to imports
+import dnslink from 'dnslink-cloudflare'
+import isEmpty from 'lodash.isempty'
 
 /**
  * @typedef {import('./types').DNSRecord} DNSRecord
  * @typedef {import('./types').CloudflareOptions} CloudflareOptions
  */
 
-class Cloudflare {
+export class Cloudflare {
   /**
    * @param {CloudflareOptions} options
    */
@@ -65,4 +66,3 @@ class Cloudflare {
   }
 }
 
-module.exports = Cloudflare

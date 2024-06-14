@@ -1,12 +1,21 @@
 'use strict'
 
-const chalk = require('chalk')
-const path = require('path')
-const fs = require('fs')
+// const chalk = require('chalk')
+// const path = require('path')
+// const fs = require('fs')
 
-const { dnsLinkersMap } = require('./dnslinkers')
-const { pinnersMap } = require('./pinners')
-const { guessPath, getReadableSize, terminalUrl } = require('./utils')
+// const { dnsLinkersMap } = require('./dnslinkers')
+// const { pinnersMap } = require('./pinners')
+// const { guessPath, getReadableSize, terminalUrl } = require('./utils')
+
+import chalk from 'chalk'
+import path from 'path'
+import fs from 'fs'
+import { dnsLinkersMap } from './dnslinkers/index.js'
+import { pinnersMap } from './pinners/index.js'
+import { guessPath, getReadableSize, terminalUrl } from './utils.js'
+import { fileURLToPath } from 'url'
+import clipboardy from 'clipboardy'
 
 /**
  * @typedef {import('./dnslinkers/types').DNSLinker} DNSLinker
@@ -111,7 +120,6 @@ function copyToClipboard (hostnames, gatewayUrls, logger) {
   }
 
   try {
-    const clipboardy = require('clipboardy')
     clipboardy.writeSync(toCopy)
     logger.info('📋  Copied HTTP gateway URL to clipboard:')
     logger.info(terminalUrl(toCopy, toCopy))
@@ -189,7 +197,7 @@ async function checkDirAndCid (dir, cid, logger) {
  * @param {DeployOptions} options
  * @returns {Promise<string>}
  */
-async function deploy ({
+export async function deploy ({
   dir,
   cid,
   tag,
@@ -210,7 +218,9 @@ async function deploy ({
   const res = await checkDirAndCid(dir, cid, logger)
   dir = res.dir
   cid = res.cid
-
+  
+  // @ts-ignore
+  const __dirname = fileURLToPath(new URL('.', import.meta.url))
   tag = tag || __dirname
 
   // In the case we only set pinning services and we're deploying a directory,
@@ -281,4 +291,3 @@ async function deploy ({
   return cid
 }
 
-module.exports = deploy
