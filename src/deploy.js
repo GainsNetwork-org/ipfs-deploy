@@ -15,6 +15,7 @@ import { dnsLinkersMap } from './dnslinkers/index.js'
 import { pinnersMap } from './pinners/index.js'
 import { guessPath, getReadableSize, terminalUrl } from './utils.js'
 import { fileURLToPath } from 'url'
+import clipboardy from 'clipboardy'
 
 /**
  * @typedef {import('./dnslinkers/types').DNSLinker} DNSLinker
@@ -119,7 +120,6 @@ function copyToClipboard (hostnames, gatewayUrls, logger) {
   }
 
   try {
-    const clipboardy = require('clipboardy')
     clipboardy.writeSync(toCopy)
     logger.info('📋  Copied HTTP gateway URL to clipboard:')
     logger.info(terminalUrl(toCopy, toCopy))

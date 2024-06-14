@@ -2,7 +2,6 @@
 
 import { create as ipfsHttp, globSource } from 'ipfs-http-client'
 import all from 'it-all'
-import path from 'path'
 
 
 /**
@@ -26,10 +25,7 @@ export class IpfsNode {
   async pinDir (dir, { tag, hidden = false } = {}) {
     // @ts-ignore
     const response = await all(this.ipfs.addAll(globSource(dir, "**/*", { recursive: true, hidden }), { wrapWithDirectory: true}))
-    const basename = path.basename(dir)
-    console.error(response, path, basename);
-    const root = response.find(({ path }) => path === basename)
-
+    const root = response.find(({ path }) => path === "") // find the root directory
     if (!root) {
       throw new Error('could not determine the CID')
     }
