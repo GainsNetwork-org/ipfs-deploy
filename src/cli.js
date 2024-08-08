@@ -104,7 +104,7 @@ const argv = yargs(hideBin(process.argv)).scriptName('ipfs-deploy')
             describe: 'Frontend package current version',
             demandOption: true,
             type: 'string'
-          },          
+          }          
         })
         .example(
           '$0',
