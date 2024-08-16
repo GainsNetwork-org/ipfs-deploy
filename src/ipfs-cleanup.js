@@ -9,7 +9,7 @@ import { MongoClient } from 'mongodb'
 import { create as ipfsHttp } from 'ipfs-http-client'
 import all from 'it-all'
 
-export async function cleanup (ipfsOptions, mongoUrl, dbName, collectionName, newCid, keepPins = 5) {
+export async function cleanup (ipfsOptions, mongoUrl, dbName, collectionName, newCid, keepPins = 5, feVersion) {
   console.log(`Cleanup started, keeping the most recent ${keepPins} CIDs.`)
   // Connect to MongoDB
   const mongoClient = new MongoClient(mongoUrl)
@@ -18,7 +18,7 @@ export async function cleanup (ipfsOptions, mongoUrl, dbName, collectionName, ne
     const collection = mongoClient.db(dbName).collection(collectionName)
 
     // Insert new CID
-    await collection.insertOne({ cid: newCid, timestamp: new Date() })
+    await collection.insertOne({ cid: newCid, timestamp: new Date(), packageVersion: feVersion })
     console.log(`Inserted CID: ${newCid}`)
 
     // Fetch most recent CIDs from MongoDB

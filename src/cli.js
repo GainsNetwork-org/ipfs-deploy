@@ -99,7 +99,12 @@ const argv = yargs(hideBin(process.argv)).scriptName('ipfs-deploy')
             demandOption: false,
             type: 'number',
             default: 5
-          }
+          },
+          'fe-version': {
+            describe: 'Frontend package current version',
+            demandOption: true,
+            type: 'string'
+          }          
         })
         .example(
           '$0',
@@ -209,7 +214,7 @@ if (!options.uploadServices && !options.pinningServices) {
 async function main () {
   try {
     const cid = await deploy(options)
-    await cleanup(options.pinningServicesCredentials['ipfs-node'], argv['mongo-url'], argv['db-name'], argv['collection-name'], cid, argv['keep-pins'])
+    await cleanup(options.pinningServicesCredentials['ipfs-node'], argv['mongo-url'], argv['db-name'], argv['collection-name'], cid, argv['keep-pins'], argv['fe-version'])
   } catch (e) {
     options.logger.error('❌  An error has occurred:\n')
     options.logger.error(e.stack || e.toString())
